@@ -3,6 +3,9 @@
 #include "die.h"
 #include "roll.h"
 #include "shooter.h"
+#include "phase.h"
+#include "point_phase.h"
+#include "come_out_phase.h"
 
 #include <time.h>
 #include <stdlib.h>
@@ -51,4 +54,18 @@ TEST_CASE("Verify Shooter Returns a Roll and Results in 2 or 12")
 		Roll *result = start.throw_die(die1, die2);
 		REQUIRE(((result->roll_value() < 13) || (result->roll_value() > 1)));
 	}
+}
+
+//Question 4 Test Case
+TEST_CASE("Verify ComeOutPhase Returns and PointPhase Returns")
+{
+	Shooter start;
+	int private_point = 1;
+	Die die1, die2;
+	ComeOutPhase x;
+	PointPhase y(private_point);
+	
+	Roll* result = start.throw_die(die1, die2);
+	REQUIRE((x.get_outcome(result) == RollOutcome::natural || x.get_outcome(result) == RollOutcome::craps || x.get_outcome(result) == RollOutcome::point));
+	REQUIRE((y.get_outcome(result) == RollOutcome::point || y.get_outcome(result) == RollOutcome::seven_out || y.get_outcome(result) == RollOutcome::nopoint));
 }
