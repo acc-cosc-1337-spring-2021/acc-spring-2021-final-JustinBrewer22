@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "die.h"
 #include "roll.h"
+#include "shooter.h"
 
 #include <time.h>
 #include <stdlib.h>
@@ -36,5 +37,18 @@ TEST_CASE("Verify Die Rolls Return a Value from 2 to 12")
 		twodie.roll_die();
 
 		REQUIRE(((twodie.roll_value() < 13) || (twodie.roll_value() > 1)));
+	}
+}
+
+//Question 3 Test Case
+TEST_CASE("Verify Shooter Returns a Roll and Results in 2 or 12")
+{
+	Shooter start;
+	srand(time(0));
+	for (int i = 0; i < 11; i = i + 1)
+	{
+		Die die1, die2;
+		Roll *result = start.throw_die(die1, die2);
+		REQUIRE(((result->roll_value() < 13) || (result->roll_value() > 1)));
 	}
 }
