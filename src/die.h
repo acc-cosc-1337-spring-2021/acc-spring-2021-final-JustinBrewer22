@@ -6,7 +6,7 @@ class Die
 {
 public:
     void roll();
-    int const rolled_value() { return roll_value; }
+    int rolled_value()const { return roll_value; }
 
 private:
     int roll_value;
